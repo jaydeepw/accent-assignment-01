@@ -11,10 +11,11 @@ import com.github.jaydeepw.assignment01.R
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
 import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.presenters.MainPresenter
+import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment(), MainContractInterface.View {
 
-    var presenter: MainPresenter? = null
+    private var presenter: MainPresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list, null, false)
@@ -28,15 +29,14 @@ class MainFragment : Fragment(), MainContractInterface.View {
         presenter?.onData()
     }
 
-    override fun initView() {
-    }
-
     override fun showData(list: List<Album>?) {
         Toast.makeText(activity, "showing data from fragment " + list?.size, Toast.LENGTH_LONG).show()
         Log.d("", "ready to show data")
     }
 
     override fun showError(message: String) {
-        Toast.makeText(activity, "message: $message", Toast.LENGTH_LONG).show()
+        if (view != null) {
+            Snackbar.make(view!!, message, Snackbar.LENGTH_LONG)
+        }
     }
 }

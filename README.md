@@ -3,6 +3,7 @@
 
 ## Recommendations for future improvements
 - Albums list should be paginated
+- Using ProGaurd for security against reverse engineering of the application and reducing the app distributable binary size
 - Showing images for the albums received from the network and cached on the device
 
 ## Requirements
