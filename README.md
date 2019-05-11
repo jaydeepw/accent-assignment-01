@@ -2,9 +2,13 @@
 
 
 ## Recommendations for future improvements
-- Albums list should be paginated
-- Using ProGaurd for security against reverse engineering of the application and reducing the app distributable binary size
+- Using ProGaurd for enhanced security by obfuscating the code to protect the app against reverse engineering of the application and reducing the app distributable binary size
 - Showing images for the albums received from the network and cached on the device
+- Data security using encryption
+- Data security using server side authentication
+- Data security using client side authentication for e.g. pattern lock, thumb impression lock
+- Albums list should be paginated
+- Using WorkManager for asynchronous data syncing
 
 ## Requirements
 - Use the latest recommendations from Android Community for

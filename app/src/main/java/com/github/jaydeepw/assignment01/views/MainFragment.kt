@@ -9,13 +9,25 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.jaydeepw.assignment01.R
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
+import com.github.jaydeepw.assignment01.di.DaggerFragmentComponent
+import com.github.jaydeepw.assignment01.di.PresenterModule
 import com.github.jaydeepw.assignment01.models.dataclasses.Album
-import com.github.jaydeepw.assignment01.presenters.MainPresenter
 import com.google.android.material.snackbar.Snackbar
+import javax.inject.Inject
 
 class MainFragment : Fragment(), MainContractInterface.View {
 
-    private var presenter: MainPresenter? = null
+    @Inject
+    lateinit var presenter: MainContractInterface.Presenter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val activityComponent = DaggerFragmentComponent.builder()
+                .presenterModule(PresenterModule(this))
+                .build()
+
+        activityComponent.inject(this)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list, null, false)
@@ -23,10 +35,7 @@ class MainFragment : Fragment(), MainContractInterface.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        presenter = MainPresenter(this)
-
-        presenter?.onData()
+        presenter.onData()
     }
 
     override fun showData(list: List<Album>?) {

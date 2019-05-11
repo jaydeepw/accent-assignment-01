@@ -10,8 +10,10 @@ import retrofit2.Response
 
 class MainNetworkModel: MainContractInterface.Model {
 
+    /*@Inject
+    lateinit var apiClient: ApiInterface*/
+
     override fun getData(callback: AlbumsCallback) {
-        // todo: network call here.
 
         val list = ApiClient.getService().getAlbums()
         list.enqueue(object : Callback<MutableList<Album>> {

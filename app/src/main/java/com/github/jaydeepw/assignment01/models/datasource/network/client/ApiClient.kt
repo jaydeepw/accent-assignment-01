@@ -18,8 +18,8 @@ class ApiClient {
 
             val retrofit = Retrofit.Builder()
                     .baseUrl("https://jsonplaceholder.typicode.com/")
-                    .client(okHttpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
+                    .client(okHttpClient.build())
                     .build()
             return retrofit.create<ApiInterface>(ApiInterface::class.java)
         }
