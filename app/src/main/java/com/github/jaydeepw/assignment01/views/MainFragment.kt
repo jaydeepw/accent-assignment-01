@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.jaydeepw.assignment01.R
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
+import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.presenters.MainPresenter
 
 class MainFragment : Fragment(), MainContractInterface.View {
@@ -28,11 +29,14 @@ class MainFragment : Fragment(), MainContractInterface.View {
     }
 
     override fun initView() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun showData(list: List<String>?) {
-        Toast.makeText(activity, "showing data", Toast.LENGTH_LONG).show()
+    override fun showData(list: List<Album>?) {
+        Toast.makeText(activity, "showing data from fragment " + list?.size, Toast.LENGTH_LONG).show()
         Log.d("", "ready to show data")
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(activity, "message: $message", Toast.LENGTH_LONG).show()
     }
 }
