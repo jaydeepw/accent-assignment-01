@@ -28,6 +28,5 @@ architecture approach and libraries.
 - Provide a list of recommendations for future improvements
 
 ## The minimum viable product
-- Application should have screen which displays albums list sorted by
-title
+- Application should have screen which displays albums list sorted by title
 - Albums should be persisted for offline viewing

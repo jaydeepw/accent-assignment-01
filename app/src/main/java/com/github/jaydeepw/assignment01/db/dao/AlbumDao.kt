@@ -22,4 +22,7 @@ interface AlbumDao {
 
     @Delete
     fun deleteAll(albums: MutableList<Album>)
+
+    @Query("DELETE from albums")
+    fun deleteAll()
 }
