@@ -9,6 +9,8 @@ interface MainContractInterface {
     interface View: BaseView {
         fun showData(list: ArrayList<Album>?)
         fun showError(messageResId: Int)
+        fun showProgress()
+        fun hideProgress()
     }
 
     interface Presenter {

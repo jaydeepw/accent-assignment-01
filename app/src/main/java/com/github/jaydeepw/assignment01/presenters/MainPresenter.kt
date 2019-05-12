@@ -7,30 +7,28 @@ import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.models.datasource.AlbumsCallback
 import com.github.jaydeepw.assignment01.models.datasource.network.MainNetworkModel
 import org.greenrobot.eventbus.EventBus
+import javax.inject.Inject
 
 class MainPresenter(
-    _view: MainContractInterface.View?,
-    _albumRepository: AlbumRepository
-) :
-    BasePresenter(), MainContractInterface.Presenter {
+    var view: MainContractInterface.View?,
+    var albumRepository: AlbumRepository): BasePresenter, MainContractInterface.Presenter {
 
-    var view = _view
-    var albumRepository = _albumRepository
-
-    var mainModel: MainNetworkModel = MainNetworkModel()
-
-    /*@Inject
-    lateinit var mainModel: MainNetworkModel*/
+    @Inject
+    lateinit var mainModel: MainNetworkModel
 
     override fun onGetData() {
 
+        view?.showProgress()
         albumRepository.getAll(object : AlbumsCallback {
             override fun onSuccess(list: MutableList<Album>) {
                 Log.d("MainPresenter", "DB.list.size ${list.size}")
+                view?.hideProgress()
                 view?.showData(list as ArrayList<Album>)
             }
 
             override fun onFailure(messageResId: Int) {
+                view?.hideProgress()
+                view?.showError(messageResId)
             }
         })
 
@@ -44,8 +42,8 @@ class MainPresenter(
                 EventBus.getDefault().post(list)
             }
 
-            override fun onFailure(message: Int) {
-                view?.showError(message)
+            override fun onFailure(messageResId: Int) {
+                view?.showError(messageResId)
             }
         })
     }
