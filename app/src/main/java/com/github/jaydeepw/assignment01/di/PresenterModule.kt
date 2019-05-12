@@ -10,13 +10,9 @@ import javax.inject.Singleton
 
 @Module
 class PresenterModule(
-    _view: MainContractInterface.View,
-    _albumRepository: AlbumRepository
+    var view: MainContractInterface.View,
+    var albumRepository: AlbumRepository
 ) {
-
-    var view = _view
-    var albumRepository = _albumRepository
-
     @Provides
     @Singleton
     internal fun providesMainPresenter(): MainPresenter {

@@ -19,6 +19,9 @@ class MainPresenter(
 
     var mainModel: MainNetworkModel = MainNetworkModel()
 
+    /*@Inject
+    lateinit var mainModel: MainNetworkModel*/
+
     override fun onGetData() {
 
         albumRepository.getAll(object : AlbumsCallback {

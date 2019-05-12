@@ -10,4 +10,5 @@ import javax.inject.Singleton
 ])
 interface FragmentComponent {
     fun inject(fragment: MainFragment)
+    // fun inject(presenter: MainPresenter)
 }

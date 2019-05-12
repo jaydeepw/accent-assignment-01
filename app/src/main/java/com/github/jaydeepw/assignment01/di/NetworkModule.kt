@@ -21,8 +21,8 @@ class NetworkModule// Constructor needs one parameter to instantiate.
     @Provides
     @Singleton
     internal fun providesSharedPreferences(application: Application):
-    // Application reference must come from AppModule.class
             SharedPreferences {
+        // Application reference must come from AppModule.class
         return PreferenceManager.getDefaultSharedPreferences(application)
     }
 
@@ -48,7 +48,6 @@ class NetworkModule// Constructor needs one parameter to instantiate.
 
         return retrofit
     }
-
 
     @Provides
     @Singleton
