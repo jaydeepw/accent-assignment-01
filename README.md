@@ -1,5 +1,6 @@
 # Accenture Assignment-01
 
+## Application architecture and technical details
 
 ## Recommendations for future improvements
 - Using ProGaurd for enhanced security by obfuscating the code to protect the app against reverse engineering of the application and reducing the app distributable binary size

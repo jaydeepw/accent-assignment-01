@@ -12,21 +12,22 @@ import com.github.jaydeepw.assignment01.contracts.MainContractInterface
 import com.github.jaydeepw.assignment01.di.DaggerFragmentComponent
 import com.github.jaydeepw.assignment01.di.PresenterModule
 import com.github.jaydeepw.assignment01.models.dataclasses.Album
+import com.github.jaydeepw.assignment01.presenters.MainPresenter
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 class MainFragment : Fragment(), MainContractInterface.View {
 
     @Inject
-    lateinit var presenter: MainContractInterface.Presenter
+    lateinit var presenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val activityComponent = DaggerFragmentComponent.builder()
+        val daggerFragmentComp = DaggerFragmentComponent.builder()
                 .presenterModule(PresenterModule(this))
                 .build()
 
-        activityComponent.inject(this)
+        daggerFragmentComp.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -35,7 +36,7 @@ class MainFragment : Fragment(), MainContractInterface.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.onData()
+        presenter.onGetData()
     }
 
     override fun showData(list: List<Album>?) {

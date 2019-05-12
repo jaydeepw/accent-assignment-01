@@ -6,7 +6,8 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
-    PresenterModule::class])
+    PresenterModule::class
+])
 interface FragmentComponent {
     fun inject(fragment: MainFragment)
 }

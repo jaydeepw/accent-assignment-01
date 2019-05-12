@@ -14,7 +14,7 @@ class PresenterModule(_view: MainContractInterface.View) {
 
     @Provides
     @Singleton
-    internal fun providesMainPresenter(): MainContractInterface.Presenter {
+    internal fun providesMainPresenter(): MainPresenter {
         return MainPresenter(view)
     }
 }

@@ -9,10 +9,9 @@ class MainPresenter(_view: MainContractInterface.View?) : BasePresenter(), MainC
 
     var view = _view
 
-    // @Inject
     var mainModel : MainNetworkModel = MainNetworkModel()
 
-    override fun onData() {
+    override fun onGetData() {
         mainModel.getData(object : AlbumsCallback {
             override fun onFailure(message: String) {
                 view?.showError(message)

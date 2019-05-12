@@ -12,7 +12,7 @@ interface MainContractInterface {
     }
 
     interface Presenter {
-        fun onData()
+        fun onGetData()
     }
 
     interface Model : MainDataSource
