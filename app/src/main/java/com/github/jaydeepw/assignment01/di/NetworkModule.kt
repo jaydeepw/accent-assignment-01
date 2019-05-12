@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.github.jaydeepw.assignment01.models.datasource.network.client.ApiInterface
-import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -39,9 +38,9 @@ class NetworkModule// Constructor needs one parameter to instantiate.
 
     @Provides
     @Singleton
-    internal fun providesRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
+    internal fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         val retrofit = Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(baseUrl)
                 .client(okHttpClient)
                 .build()

@@ -4,7 +4,6 @@ import android.app.Application
 import com.github.jaydeepw.assignment01.di.AppComponent
 import com.github.jaydeepw.assignment01.di.AppModule
 import com.github.jaydeepw.assignment01.di.DaggerAppComponent
-import com.github.jaydeepw.assignment01.di.NetworkModule
 
 class MyApp : Application() {
 
@@ -17,7 +16,6 @@ class MyApp : Application() {
         appComponent = DaggerAppComponent.builder()
                 // list of modules that are part of this component need to be created here too
                 .appModule(AppModule(this)) // This also corresponds to the name of your module: %component_name%Module
-                .networkModule(NetworkModule("https://jsonplaceholder.typicode.com/"))
                 .build()
 
         // If a Dagger 2 component does not have any constructor arguments for any of its modules,

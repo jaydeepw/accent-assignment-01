@@ -15,6 +15,7 @@ import com.github.jaydeepw.assignment01.db.AlbumRepository
 import com.github.jaydeepw.assignment01.db.AppDatabase
 import com.github.jaydeepw.assignment01.di.DaggerFragmentComponent
 import com.github.jaydeepw.assignment01.di.ModelsModule
+import com.github.jaydeepw.assignment01.di.NetworkModule
 import com.github.jaydeepw.assignment01.di.PresenterModule
 import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.presenters.MainPresenter
@@ -42,10 +43,12 @@ class MainFragment : Fragment(), MainContractInterface.View {
         val daggerFragmentComp = DaggerFragmentComponent.builder()
                 .presenterModule(PresenterModule(this, AlbumRepository(activity?.application!!)))
                 .modelsModule(ModelsModule())
+                .networkModule(NetworkModule("https://jsonplaceholder.typicode.com/"))
                 .build()
 
         daggerFragmentComp.inject(this)
         daggerFragmentComp.inject(presenter)
+        daggerFragmentComp.inject(presenter.mainModel)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
