@@ -8,7 +8,6 @@ import com.github.jaydeepw.assignment01.models.datasource.AlbumsCallback
 import com.github.jaydeepw.assignment01.models.datasource.network.MainNetworkModel
 import org.greenrobot.eventbus.EventBus
 
-
 class MainPresenter(
     _view: MainContractInterface.View?,
     _albumRepository: AlbumRepository

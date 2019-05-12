@@ -60,7 +60,7 @@ class MainFragment : Fragment(), MainContractInterface.View {
         recycleListView?.layoutManager = GridLayoutManager(activity, 2)
 
         // Access the RecyclerView Adapter and load the data into it
-        recycleListView?.setAlbumsAdapter(list!!)
+        recycleListView?.setOrUpdateAdapter(list!!)
     }
 
     override fun showError(messageResId: Int) {
@@ -72,7 +72,7 @@ class MainFragment : Fragment(), MainContractInterface.View {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(albums: List<Album>) {
         // Toast.makeText(activity, "==> albums.size " + albums.size, Toast.LENGTH_SHORT).show()
-        recycleListView?.updateItems(albums)
+        recycleListView?.setOrUpdateAdapter(albums as ArrayList<Album>)
     }
 
     override fun onStart() {
