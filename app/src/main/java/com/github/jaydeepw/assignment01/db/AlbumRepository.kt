@@ -54,10 +54,15 @@ class AlbumRepository internal constructor(private val application: Application)
 
         override fun onPostExecute(result: List<Album>?) {
             super.onPostExecute(result)
-            if (result != null) {
-                callback.onSuccess(result as MutableList<Album>)
-            } else {
-                callback.onFailure(R.string.msg_failure_get_albums_db)
+
+            try {
+                if (result != null) {
+                    callback.onSuccess(result as MutableList<Album>)
+                } else {
+                    callback.onNotSuccess(R.string.msg_failure_get_albums_db)
+                }
+            } catch (e: Exception) {
+                callback.onFailure(e.message ?: e.localizedMessage)
             }
         }
     }

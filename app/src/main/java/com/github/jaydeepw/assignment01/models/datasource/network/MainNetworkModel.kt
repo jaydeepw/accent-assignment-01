@@ -1,6 +1,6 @@
 package com.github.jaydeepw.assignment01.models.datasource.network
 
-import com.github.jaydeepw.assignment01.R
+import com.github.jaydeepw.assignment01.Utils
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
 import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.models.datasource.AlbumsCallback
@@ -29,13 +29,12 @@ class MainNetworkModel: MainContractInterface.Model {
 
                     callback.onSuccess(body)
                 } else {
-                    // TODO: Parse message for unsuccessful response
-                    callback.onFailure(R.string.msg_error_general)
+                    callback.onNotSuccess(Utils.Companion.parseNetworkCode(response.code()))
                 }
             }
 
             override fun onFailure(call: Call<MutableList<Album>>, t: Throwable) {
-                callback.onFailure(R.string.msg_error_general)
+                callback.onFailure(t.message ?: t.localizedMessage)
             }
         })
     }

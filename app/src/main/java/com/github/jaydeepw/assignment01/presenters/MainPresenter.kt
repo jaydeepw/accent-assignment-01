@@ -20,16 +20,22 @@ class MainPresenter(
 
         view?.showProgress()
         albumRepository.getAll(object : AlbumsCallback {
+            override fun onNotSuccess(messageResId: Int) {
+                view?.hideProgress()
+                view?.showError(messageResId)
+            }
+
+            override fun onFailure(message: String) {
+                view?.hideProgress()
+                // view?.showError(message)
+            }
+
             override fun onSuccess(list: MutableList<Album>) {
                 Log.d("MainPresenter", "DB.list.size ${list.size}")
                 view?.hideProgress()
                 view?.showData(list as ArrayList<Album>)
             }
 
-            override fun onFailure(messageResId: Int) {
-                view?.hideProgress()
-                view?.showError(messageResId)
-            }
         })
 
         mainModel.getData(object : AlbumsCallback {
@@ -42,7 +48,12 @@ class MainPresenter(
                 EventBus.getDefault().post(list)
             }
 
-            override fun onFailure(messageResId: Int) {
+            override fun onFailure(message: String) {
+                view?.hideProgress()
+            }
+
+            override fun onNotSuccess(messageResId: Int) {
+                view?.hideProgress()
                 view?.showError(messageResId)
             }
         })
