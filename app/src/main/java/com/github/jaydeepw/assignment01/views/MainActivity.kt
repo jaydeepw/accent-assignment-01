@@ -1,7 +1,6 @@
 package com.github.jaydeepw.assignment01.views
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import com.github.jaydeepw.assignment01.R
 import com.google.android.material.snackbar.Snackbar
@@ -20,12 +19,6 @@ class MainActivity : BaseActivity() {
         }
 
         // Toast.makeText(this, "Main activity", Toast.LENGTH_LONG).show()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

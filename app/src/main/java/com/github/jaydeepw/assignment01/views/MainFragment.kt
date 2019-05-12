@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.jaydeepw.assignment01.R
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
 import com.github.jaydeepw.assignment01.di.DaggerFragmentComponent
@@ -44,6 +46,15 @@ class MainFragment : Fragment(), MainContractInterface.View {
         Toast.makeText(activity, "showing data from fragment " + list?.size, Toast.LENGTH_LONG).show()
         Log.d("", "ready to show data")
         val adapter = AnimalAdapter(list, activity!!)
+        val recycleListView = view?.findViewById<RecyclerView>(R.id.list_items)
+        // Creates a vertical Layout Manager
+        recycleListView?.layoutManager = LinearLayoutManager(activity)
+
+        // You can use GridLayoutManager if you want multiple columns. Enter the number of columns as a parameter.
+        // recycleListView.layoutManager = GridLayoutManager(this, 2)
+
+        // Access the RecyclerView Adapter and load the data into it
+        recycleListView?.adapter = adapter
     }
 
     override fun showError(message: String) {
