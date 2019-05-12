@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.room.Room
@@ -72,7 +71,7 @@ class MainFragment : Fragment(), MainContractInterface.View {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(albums: List<Album>) {
-        Toast.makeText(activity, "==> albums.size " + albums.size, Toast.LENGTH_SHORT).show()
+        // Toast.makeText(activity, "==> albums.size " + albums.size, Toast.LENGTH_SHORT).show()
         recycleListView?.updateItems(albums)
     }
 

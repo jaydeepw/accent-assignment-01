@@ -9,19 +9,20 @@ import com.github.jaydeepw.assignment01.models.datasource.network.MainNetworkMod
 import org.greenrobot.eventbus.EventBus
 
 
-
-class MainPresenter(_view: MainContractInterface.View?,
-                    _albumRepository: AlbumRepository) :
-        BasePresenter(), MainContractInterface.Presenter {
+class MainPresenter(
+    _view: MainContractInterface.View?,
+    _albumRepository: AlbumRepository
+) :
+    BasePresenter(), MainContractInterface.Presenter {
 
     var view = _view
     var albumRepository = _albumRepository
 
-    var mainModel : MainNetworkModel = MainNetworkModel()
+    var mainModel: MainNetworkModel = MainNetworkModel()
 
     override fun onGetData() {
 
-        albumRepository.getAll(object: AlbumsCallback {
+        albumRepository.getAll(object : AlbumsCallback {
             override fun onSuccess(list: MutableList<Album>) {
                 Log.d("MainPresenter", "DB.list.size ${list.size}")
                 view?.showData(list as ArrayList<Album>)

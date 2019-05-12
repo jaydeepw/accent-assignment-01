@@ -7,7 +7,7 @@ import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.views.adapters.Adapter
 import java.util.*
 
-class SortedAlbumsRecyclerView : RecyclerView{
+class SortedAlbumsRecyclerView : RecyclerView {
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
