@@ -8,7 +8,7 @@ interface MainContractInterface {
 
     interface View: BaseView {
         fun showData(list: ArrayList<Album>?)
-        fun showError(message: String)
+        fun showError(messageResId: Int)
     }
 
     interface Presenter {

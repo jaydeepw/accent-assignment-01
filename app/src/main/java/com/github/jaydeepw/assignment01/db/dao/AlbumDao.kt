@@ -1,6 +1,5 @@
 package com.github.jaydeepw.assignment01.db.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -10,7 +9,7 @@ import com.github.jaydeepw.assignment01.models.dataclasses.Album
 @Dao
 interface AlbumDao {
     @get:Query("SELECT * FROM albums")
-    val all: LiveData<List<Album>>
+    val all: List<Album>
 
     @Insert
     fun insertAll(albums: MutableList<Album>)

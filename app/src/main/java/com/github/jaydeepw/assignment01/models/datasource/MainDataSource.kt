@@ -9,5 +9,5 @@ interface MainDataSource {
 
 interface AlbumsCallback {
     fun onSuccess(list : MutableList<Album>)
-    fun onFailure(message: String)
+    fun onFailure(messageResId: Int)
 }

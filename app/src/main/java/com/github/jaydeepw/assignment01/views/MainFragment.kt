@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.github.jaydeepw.assignment01.Constants
-import com.github.jaydeepw.assignment01.R
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
 import com.github.jaydeepw.assignment01.db.AlbumRepository
 import com.github.jaydeepw.assignment01.db.AppDatabase
@@ -19,10 +18,14 @@ import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.presenters.MainPresenter
 import com.github.jaydeepw.assignment01.views.adapters.Adapter
 import com.google.android.material.snackbar.Snackbar
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import javax.inject.Inject
 
 class MainFragment : Fragment(), MainContractInterface.View {
 
+    private lateinit var adapter: Adapter
     @Inject
     lateinit var presenter: MainPresenter
 
@@ -42,7 +45,7 @@ class MainFragment : Fragment(), MainContractInterface.View {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_list, null, false)
+        return inflater.inflate(com.github.jaydeepw.assignment01.R.layout.fragment_list, null, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,8 +54,8 @@ class MainFragment : Fragment(), MainContractInterface.View {
     }
 
     override fun showData(list: ArrayList<Album>?) {
-        val adapter = Adapter(list, activity!!)
-        val recycleListView = view?.findViewById<RecyclerView>(R.id.list_items)
+        adapter = Adapter(list, activity!!)
+        val recycleListView = view?.findViewById<RecyclerView>(com.github.jaydeepw.assignment01.R.id.list_items)
 
         // Because this is a list of albums, makes more sense in using a GridLayoutManger instead
         // of the Linear layout manager.
@@ -63,9 +66,25 @@ class MainFragment : Fragment(), MainContractInterface.View {
         recycleListView?.adapter = adapter
     }
 
-    override fun showError(message: String) {
+    override fun showError(messageResId: Int) {
         if (view != null) {
-            Snackbar.make(view!!, message, Snackbar.LENGTH_LONG)
+            Snackbar.make(view!!, getString(messageResId), Snackbar.LENGTH_LONG)
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(albums: List<Album>) {
+        // Toast.makeText(activity, "==> albums.size " + albums.size, Toast.LENGTH_SHORT).show()
+        adapter.updateAll(albums)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 }

@@ -1,5 +1,6 @@
 package com.github.jaydeepw.assignment01.models.datasource.network
 
+import com.github.jaydeepw.assignment01.R
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
 import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.models.datasource.AlbumsCallback
@@ -28,13 +29,13 @@ class MainNetworkModel: MainContractInterface.Model {
                     callback.onSuccess(body)
                 } else {
                     // TODO: Parse message for unsuccessful response
-                    callback.onFailure("Error in API call")
+                    callback.onFailure(R.string.msg_error_general)
                 }
             }
 
             override fun onFailure(call: Call<MutableList<Album>>, t: Throwable) {
                 // TODO: Parse message for unsuccessful response
-                callback.onFailure("Error in API call")
+                callback.onFailure(R.string.msg_error_general)
             }
         })
     }

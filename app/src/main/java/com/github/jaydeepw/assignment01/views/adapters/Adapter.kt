@@ -23,6 +23,12 @@ class Adapter(val items : ArrayList<Album>?, val context: Context) : RecyclerVie
     override fun getItemCount(): Int {
         return items?.size!!
     }
+
+    fun updateAll(newItems: List<Album>) {
+        items?.clear()
+        items?.addAll(newItems)
+        notifyDataSetChanged()
+    }
 }
 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
