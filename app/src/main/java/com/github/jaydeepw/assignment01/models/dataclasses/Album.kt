@@ -8,4 +8,6 @@ data class Album(
         @PrimaryKey(autoGenerate = true) val id: Int = 0,
         val title: String = "",
         val userId: Int = 0
-)
+) {
+
+}

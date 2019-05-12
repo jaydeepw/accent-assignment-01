@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.github.jaydeepw.assignment01.Constants
 import com.github.jaydeepw.assignment01.R
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
+import com.github.jaydeepw.assignment01.db.AlbumRepository
 import com.github.jaydeepw.assignment01.db.AppDatabase
 import com.github.jaydeepw.assignment01.di.DaggerFragmentComponent
 import com.github.jaydeepw.assignment01.di.PresenterModule
@@ -30,10 +32,10 @@ class MainFragment : Fragment(), MainContractInterface.View {
         super.onCreate(savedInstanceState)
 
         database = Room.databaseBuilder(activity?.applicationContext!!,
-                AppDatabase::class.java, "media.db").build()
+                AppDatabase::class.java, Constants.Companion.DB_NAME).build()
 
         val daggerFragmentComp = DaggerFragmentComponent.builder()
-                .presenterModule(PresenterModule(this, database.albumDao()))
+                .presenterModule(PresenterModule(this, AlbumRepository(activity?.application!!)))
                 .build()
 
         daggerFragmentComp.inject(this)
