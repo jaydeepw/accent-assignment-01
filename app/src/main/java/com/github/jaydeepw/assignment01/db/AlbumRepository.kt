@@ -21,25 +21,11 @@ class AlbumRepository internal constructor(application: Application) {
         albums = albumDao.all
     }
 
-    fun insert(word: Album) {
-        insertAsyncTask(albumDao).execute(word)
-    }
-
     fun insertAll(list: List<Album>) {
-        insertAllAsyncTask(albumDao).execute(list)
+        InsertAllAsyncTask(albumDao).execute(list)
     }
 
-    private class insertAsyncTask internal constructor(private val mAsyncTaskDao: AlbumDao) :
-        AsyncTask<Album, Void, Void>() {
-
-        override fun doInBackground(vararg params: Album): Void? {
-            mAsyncTaskDao.delete(params[0])
-            mAsyncTaskDao.insert(params[0])
-            return null
-        }
-    }
-
-    private class insertAllAsyncTask internal constructor(private val mAsyncTaskDao: AlbumDao) :
+    private class InsertAllAsyncTask internal constructor(private val mAsyncTaskDao: AlbumDao) :
         AsyncTask<List<Album>, Void, Void>() {
 
         override fun doInBackground(vararg params: List<Album>): Void? {
