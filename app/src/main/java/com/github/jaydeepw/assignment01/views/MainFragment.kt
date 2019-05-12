@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.github.jaydeepw.assignment01.Constants
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
@@ -16,7 +16,6 @@ import com.github.jaydeepw.assignment01.di.DaggerFragmentComponent
 import com.github.jaydeepw.assignment01.di.PresenterModule
 import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.presenters.MainPresenter
-import com.github.jaydeepw.assignment01.views.adapters.Adapter
 import com.google.android.material.snackbar.Snackbar
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -25,7 +24,7 @@ import javax.inject.Inject
 
 class MainFragment : Fragment(), MainContractInterface.View {
 
-    private lateinit var adapter: Adapter
+    private var recycleListView: SortedAlbumsRecyclerView? = null
     @Inject
     lateinit var presenter: MainPresenter
 
@@ -54,8 +53,7 @@ class MainFragment : Fragment(), MainContractInterface.View {
     }
 
     override fun showData(list: ArrayList<Album>?) {
-        adapter = Adapter(list, activity!!)
-        val recycleListView = view?.findViewById<RecyclerView>(com.github.jaydeepw.assignment01.R.id.list_items)
+        recycleListView = view?.findViewById(com.github.jaydeepw.assignment01.R.id.list_items)
 
         // Because this is a list of albums, makes more sense in using a GridLayoutManger instead
         // of the Linear layout manager.
@@ -63,7 +61,7 @@ class MainFragment : Fragment(), MainContractInterface.View {
         recycleListView?.layoutManager = GridLayoutManager(activity, 2)
 
         // Access the RecyclerView Adapter and load the data into it
-        recycleListView?.adapter = adapter
+        recycleListView?.setAlbumsAdapter(list!!)
     }
 
     override fun showError(messageResId: Int) {
@@ -74,8 +72,8 @@ class MainFragment : Fragment(), MainContractInterface.View {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(albums: List<Album>) {
-        // Toast.makeText(activity, "==> albums.size " + albums.size, Toast.LENGTH_SHORT).show()
-        adapter.updateAll(albums)
+        Toast.makeText(activity, "==> albums.size " + albums.size, Toast.LENGTH_SHORT).show()
+        recycleListView?.updateItems(albums)
     }
 
     override fun onStart() {

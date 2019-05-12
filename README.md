@@ -13,7 +13,7 @@
 
 ### Technical recommendations
 - Albums list should be paginated
-- Using WorkManager for asynchronous data syncing
+- Implementing Sync operations using WorkManager
 
 ### UX recommendations
 - Using live data to bind the DB to the UI. Changing data in the DB will update the UI seamlessly
