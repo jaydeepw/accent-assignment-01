@@ -13,6 +13,7 @@ import com.github.jaydeepw.assignment01.di.DaggerFragmentComponent
 import com.github.jaydeepw.assignment01.di.PresenterModule
 import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.presenters.MainPresenter
+import com.github.jaydeepw.assignment01.views.adapters.AnimalAdapter
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -39,9 +40,10 @@ class MainFragment : Fragment(), MainContractInterface.View {
         presenter.onGetData()
     }
 
-    override fun showData(list: List<Album>?) {
+    override fun showData(list: ArrayList<Album>?) {
         Toast.makeText(activity, "showing data from fragment " + list?.size, Toast.LENGTH_LONG).show()
         Log.d("", "ready to show data")
+        val adapter = AnimalAdapter(list, activity!!)
     }
 
     override fun showError(message: String) {

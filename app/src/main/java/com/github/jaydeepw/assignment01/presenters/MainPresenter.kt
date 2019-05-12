@@ -18,7 +18,7 @@ class MainPresenter(_view: MainContractInterface.View?) : BasePresenter(), MainC
             }
 
             override fun onSuccess(list: MutableList<Album>) {
-                view?.showData(list)
+                view?.showData(list as ArrayList<Album>)
             }
 
         })

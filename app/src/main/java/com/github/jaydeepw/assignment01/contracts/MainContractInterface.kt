@@ -7,7 +7,7 @@ import com.github.jaydeepw.assignment01.views.BaseView
 interface MainContractInterface {
 
     interface View: BaseView {
-        fun showData(list: List<Album>?)
+        fun showData(list: ArrayList<Album>?)
         fun showError(message: String)
     }
 
