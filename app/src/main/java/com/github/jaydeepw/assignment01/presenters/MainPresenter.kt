@@ -27,7 +27,6 @@ class MainPresenter(
 
             override fun onFailure(message: String) {
                 view?.hideProgress()
-                // view?.showError(message)
             }
 
             override fun onSuccess(list: MutableList<Album>) {
@@ -35,7 +34,6 @@ class MainPresenter(
                 view?.hideProgress()
                 view?.showData(list as ArrayList<Album>)
             }
-
         })
 
         mainModel.getData(object : AlbumsCallback {

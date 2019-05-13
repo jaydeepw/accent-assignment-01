@@ -7,12 +7,9 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.room.Room
-import com.github.jaydeepw.assignment01.Constants
 import com.github.jaydeepw.assignment01.R
 import com.github.jaydeepw.assignment01.contracts.MainContractInterface
 import com.github.jaydeepw.assignment01.db.AlbumRepository
-import com.github.jaydeepw.assignment01.db.AppDatabase
 import com.github.jaydeepw.assignment01.di.DaggerFragmentComponent
 import com.github.jaydeepw.assignment01.di.ModelsModule
 import com.github.jaydeepw.assignment01.di.NetworkModule
@@ -32,16 +29,12 @@ class MainFragment : Fragment(), MainContractInterface.View {
     @Inject
     lateinit var presenter: MainPresenter
 
-    lateinit var database: AppDatabase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        database = Room.databaseBuilder(activity?.applicationContext!!,
-                AppDatabase::class.java, Constants.Companion.DB_NAME).build()
-
+        val repository = AlbumRepository(activity?.application!!)
         val daggerFragmentComp = DaggerFragmentComponent.builder()
-                .presenterModule(PresenterModule(this, AlbumRepository(activity?.application!!)))
+                .presenterModule(PresenterModule(this, repository))
                 .modelsModule(ModelsModule())
                 .networkModule(NetworkModule("https://jsonplaceholder.typicode.com/"))
                 .build()

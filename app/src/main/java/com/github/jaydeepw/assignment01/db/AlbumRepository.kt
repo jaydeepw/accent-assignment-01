@@ -10,16 +10,14 @@ import com.github.jaydeepw.assignment01.models.dataclasses.Album
 import com.github.jaydeepw.assignment01.models.datasource.AlbumsCallback
 
 
-class AlbumRepository internal constructor(private val application: Application) {
+class AlbumRepository internal constructor(application: Application) {
 
     private val albumDao: AlbumDao
-    // internal val albums: LiveData<List<Album>>
 
     init {
         val db = Room.databaseBuilder(application,
             AppDatabase::class.java, Constants.Companion.DB_NAME).build()
         albumDao = db.albumDao()
-        // albums = albumDao.all
     }
 
     fun insertAll(list: List<Album>) {
@@ -46,8 +44,6 @@ class AlbumRepository internal constructor(private val application: Application)
         private val callback: AlbumsCallback
     ) :
         AsyncTask<AlbumsCallback, Void, List<Album>>() {
-
-        
         override fun doInBackground(vararg params: AlbumsCallback): List<Album>? {
             return asyncTaskDao.all
         }
