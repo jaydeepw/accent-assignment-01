@@ -41,7 +41,8 @@ class MainFragment : Fragment(), MainContractInterface.View {
 
         daggerFragmentComp.inject(this)
         daggerFragmentComp.inject(presenter)
-        daggerFragmentComp.inject(presenter.mainModel)
+        daggerFragmentComp.inject(repository)
+        daggerFragmentComp.inject(repository.mainModel)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

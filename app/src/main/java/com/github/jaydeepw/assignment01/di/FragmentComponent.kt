@@ -1,5 +1,6 @@
 package com.github.jaydeepw.assignment01.di
 
+import com.github.jaydeepw.assignment01.db.AlbumRepository
 import com.github.jaydeepw.assignment01.models.datasource.mock.MainMockModel
 import com.github.jaydeepw.assignment01.models.datasource.network.MainNetworkModel
 import com.github.jaydeepw.assignment01.presenters.MainPresenter
@@ -16,6 +17,7 @@ import javax.inject.Singleton
 interface FragmentComponent {
     fun inject(fragment: MainFragment)
     fun inject(presenter: MainPresenter)
+    fun inject(repository: AlbumRepository)
     fun inject(mainModel: MainNetworkModel)
     fun inject(mainModel: MainMockModel)
 }
