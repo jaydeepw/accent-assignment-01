@@ -17,7 +17,10 @@ architecture approach and libraries.
 - Using MVP architecture
 - Uses Retrofit for retrieving data from the webservice
 - Uses Repository Pattern for transparent access of data to the view layer
-- Adheres to separation of concern, do not repeat yourself and dependency injection programming principles
+- Adheres to software design principles like 
+  - Separation of Concerns
+  - DRY(Do not repeat yourself)
+  - Dependency Injection
 
 ## Recommendations for future improvements
 
