@@ -15,6 +15,7 @@ architecture approach and libraries.
 
 ## Application architecture and technical details
 - Using MVP architecture
+- Uses Kotlin as the programming language
 - Uses Retrofit for retrieving data from the webservice
 - Uses Repository Pattern for transparent access of data to the view layer
 - Adheres to software design principles like 
